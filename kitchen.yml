@@ -1,0 +1,28 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: puppet_apply
+  manifests_path: ./manifests
+  modules_path: ./spec/fixtures/modules
+  require_chef_for_busser: false
+  resolve_with_librarian_puppet: false
+  puppet_debug: true
+  puppet_verbose: true
+
+
+verifier:
+  name: pester
+  test_folder: spec/acceptance
+
+platforms:
+  - name: Windows-2016
+    driver_plugin: vagrant
+    driver:
+      box: win2016
+
+suites:
+  - name: default
+    run_list:
+    attributes:
